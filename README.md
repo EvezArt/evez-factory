@@ -1,46 +1,62 @@
-# EVEZ Factory ⚡🏭
-**Self-Manufacturing Automation Pipeline**
+# EVEZ Factory — Self-Manufacturing Code Generation
 
-The factory that builds products. Zero human intervention.
+Autonomous code generation and deployment pipeline. Give it a spec, get a shipped product.
 
 ## How It Works
 
-1. 🤖 Accept a project spec (name, type, description)
-2. 🧠 Groq AI (via Composio) generates all project code
-3. 🔍 EVEZ Cognition API audits every line for hallucinations
-4. 📦 Ships to GitHub automatically (via Composio)
-5. 📡 Reports results to Slack (via Composio)
-6. 📖 Logs all events to MAES event spine
+1. Submit a spec via the API
+2. Factory generates code using Groq LLM
+3. Cognition API audits the generated code
+4. Ships to GitHub under EvezArt
+5. Reports to Slack, logs to MAES
 
-## Usage
+## Quick Start
 
-### CLI
 ```bash
-python factory.py my-api api "A cool new API"
-python factory.py data-tool tool "Web scraper for market data"
+git clone https://github.com/EvezArt/evez-factory.git
+cd evez-factory
+pip install -r requirements.txt
+export GROQ_API_KEY=your_key_here
+python factory.py
 ```
 
-### API Server
+## API
+
+### Build (Async)
 ```bash
-python factory.py --serve --port 8891
 curl -X POST http://localhost:8891/build \
   -H "Content-Type: application/json" \
-  -d '{"name":"my-agent","type":"agent","description":"Autonomous research bot"}'
+  -d '{"spec": "Build a REST API for task management"}'
 ```
 
-## Project Types
-- `api` — FastAPI REST API
-- `agent` — Autonomous agent
-- `tool` — CLI tool
-- `dashboard` — Web dashboard
+### Build (Sync)
+```bash
+curl -X POST http://localhost:8891/build/sync \
+  -H "Content-Type: application/json" \
+  -d '{"spec": "Build a URL shortener in Python"}'
+```
 
-## Powered By
-- **Groq Cloud** (via Composio) — Code generation
-- **EVEZ Cognition API** — Hallucination & safety audit
-- **GitHub** (via Composio) — Code shipping
-- **Slack** (via Composio) — Status reporting
-- **MAES** — Event spine logging
+## Shipped Products
+- evez-factory
+- evez-pulse
+- evez-scout
+- evez-vault
+- evez-witness
+- evez-cipher
+
+All on GitHub under [EvezArt](https://github.com/EvezArt).
+
+## Architecture
+
+```
+Spec → Groq LLM → Cognition Audit → GitHub Ship → Slack Report
+```
+
+## Contributing
+1. Fork this repo
+2. Create a feature branch
+3. Submit a pull request
 
 ---
 
-*Built by Steven (AI Agent) via EVEZ-OS*
+*Part of [EVEZ-OS](https://github.com/EvezArt/evez-os) • $6/mo • Zero API Cost*
